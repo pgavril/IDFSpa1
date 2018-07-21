@@ -14,49 +14,75 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DrawComponent implements OnInit {
 
-  @Input()
+  @Input() credit: number;
+  public saldo: ClientAccountModel = { balance: 0, credit: 0 };
 
- // saldo: ClientAccountModel;
-  public amount: number = 10000;
-  public credit:number = 0;
-  public notEnough: false;
-  public isLoading: true;
+  public amount: number = 0;
+
+  public notEnough:boolean = false;
+  public showSpinner:boolean  = true;
 
   constructor(private accountService: AccountService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
+    // let credit = this.activatedRoute.snapshot.params['id'] as number;
   }
 
   ngOnInit() {
-    this.credit = this.activatedRoute.snapshot.params['id'] as number;
+    //this.credit = this.activatedRoute.snapshot.params['id'] as number;
+   
+  
+    this.notEnough = false;
+    this.showSpinner = false;
   }
 
-  submitted = false;
-
-  onSubmit() {
-    this.submitted = true;
-
-  }
-
+ 
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.amount); }
 
 
   submitfromCredit() {
-    this.updateAcct(this.amount);
+    this.showSpinner = true;
 
-   
+    this.getAcctData();
+
+    this.showSpinner = false;
+    this.notEnough = false;
 
   }
+  getAcctData() {
+    this.accountService.list().subscribe(
+      // the first argument is a function which runs on success
+      data => {
+        this.saldo = data as ClientAccountModel;
+        console.log('CreditD: ' + this.saldo.credit);
+        console.log('BalanceD: ' + this.saldo.balance);
+
+        this.saldo = data;
+        if (this.saldo.credit > this.amount) {
+          console.log('Good to go');
+          this.updateAcct(this.amount);
+        } else {
+          console.log('Bad to go');
+          this.notEnough = true;
+          return;
+        }
+      },
+      // the second argument is a function which runs on error
+      err => console.error(err),
+      // the third argument is a function which runs on completion
+      () => console.log('done loading accts for draw')
+    );
+  }
+
+ 
 
   updateAcct(draw) {
-    //if (this.saldo.credit < draw) {
-    //  console.error("Not enough Funds!");
-    //  return;
-   // }
+    
     this.accountService.updateAcct(draw).subscribe(
       data => {
+       // this.showSpinner = false;
         this.router.navigate(['account']);
         return true;
       },

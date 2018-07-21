@@ -18,7 +18,7 @@ export class AccountComponent implements OnInit {
   public values: string[];
   public saldo: ClientAccountModel = { balance: 0, credit: 0};
   public saldo1: ClientAccountModel = { balance: 0, credit: 0};
-  public isLoading : boolean = true;
+  public showSpinner : boolean = true;
 
   //  constructor(private accountService: AccountService ) { }
 
@@ -47,7 +47,7 @@ export class AccountComponent implements OnInit {
   getAcct1() {
     this.accountService.list().subscribe(
       // the first argument is a function which runs on success
-      data => { this.saldo1 = data;  this.isLoading = false;},
+      data => { this.saldo1 = data; this.showSpinner = false;},
       // the second argument is a function which runs on error
       err => console.error(err),
       // the third argument is a function which runs on completion
@@ -78,6 +78,8 @@ export class AccountComponent implements OnInit {
     if (this.saldo.credit <= 0) {
       return true;
     }
+
+
 
   }
 }

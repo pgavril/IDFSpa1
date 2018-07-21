@@ -31,7 +31,7 @@ import { HeaderComponent } from './shared/header/header.component';
     RouterModule.forRoot([
       { path: '', redirectTo: 'account', pathMatch: 'full' },
       { path: 'account', component: AccountComponent },
-      { path: 'draw', component: DrawComponent },
+      { path: 'draw'  , component: DrawComponent },
       { path: '**', redirectTo: 'account' }
     ]),
     UiModule

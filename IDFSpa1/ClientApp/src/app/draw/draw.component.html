@@ -14,8 +14,9 @@
         <div class="check-element animate-show-hide" *ngIf="notEnough">
           Not enough Funds.
         </div>
-
-        <p><mat-spinner *ngIf="showSpinner" mode="indeterminate" diameter="17" ></mat-spinner>
+        {{diagnostic}}
+        <p>
+          <mat-spinner *ngIf="showSpinner" [color]="'warn'" [mode]="'indeterminate'" diameter="17"></mat-spinner>
         </p>
 
 
@@ -24,7 +25,6 @@
 
         <span style="color: lightgreen">$</span>
         <input [(ngModel)]="amount"
-              
                name="amount"
                type="number"
                step="0.01"

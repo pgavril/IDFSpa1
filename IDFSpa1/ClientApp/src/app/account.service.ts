@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ClientAccountModel } from './models/account.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import 'rxjs';
 import {forkJoin} from 'rxjs';
 //import Accountmodel = require("./models/account.model");
 //import ClientAccountModel = Accountmodel.ClientAccountModel;
