@@ -1,0 +1,46 @@
+ 
+
+ 
+<div class="container" style="background-color: white">
+  <div class="panel-heading">
+   
+    <div class="row">
+      <div class="col-sm">
+
+      </div>
+
+      <div class="col-sm">
+
+        <div class="check-element animate-show-hide" *ngIf="notEnough">
+          Not enough Funds.
+        </div>
+
+        <p><mat-spinner *ngIf="showSpinner" mode="indeterminate" diameter="17" ></mat-spinner>
+        </p>
+
+
+        <label for="amount" style="color: lightgreen">Amount</label>
+        <br />
+
+        <span style="color: lightgreen">$</span>
+        <input [(ngModel)]="amount"
+              
+               name="amount"
+               type="number"
+               step="0.01"
+               id="amount" required [ngModelOptions]="{standalone: true}">
+
+
+
+        <div class="text-right">
+          <button type="submit" class="transp" (click)="submitfromCredit()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm">
+  </div> 
+  </div>
+
+
+

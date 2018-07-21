@@ -1,0 +1,51 @@
+<div class="panel panel-default panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Home</h3>
+  </div>
+
+ 
+
+  <div class="panel-body">
+
+    <div class="well well-sm mouseOver">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+          <table style="margin: 0 auto;" width="100%">
+            <thead >
+            <tr>
+              <th id="credit"><h4>{{ saldo.balance | currency:"USD":symbol:"1.2-2" }}</h4></th>
+              <td></td>
+              <th id="balance"><h4>{{ saldo.credit  | currency:"USD":symbol:"1.2-2" }}</h4></th>
+              <td></td>
+              <th id="funds"><h4>{{saldo.credit | currency:"USD":symbol:"1.2-2" }}</h4></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td headers="credit">Balance</td>
+              <td></td>
+              <td headers="balance">Available funds</td>
+              <td></td>
+              <td headers="funds">Credit Limit</td>
+            </tr>
+            <tr><br/></tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <!--<md-progress-circular md-mode="indeterminate"></md-progress-circular>-->
+              <td></td>
+              <td headers="balance">
+                <button mat-raised-button bank-button color="primary" (click)="withdraw()" [disabled]="withdrawProhibited">
+                  MAKE A DRAW
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
